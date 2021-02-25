@@ -1,0 +1,7 @@
+.Home {
+    background:chocolate;
+}
+
+.Home .tanksWrapper {
+    display: flex;
+}
