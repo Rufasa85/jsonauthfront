@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import LoginForm from "./LoginForm";
 import API from "./utils/API";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from "./pages/Home";
 import TankDetail from "./pages/TankDetail";
+import NavBar from "./components/NavBar";
+import Profile from "./pages/Profile";
 
 function App() {
   const [userState, setUserState] = useState({
@@ -127,25 +128,17 @@ function App() {
 
   return (
     <Router>
-    <div style={{backgroundColor:"salmon"}}>
-      {userState.isLoggedIn ? <span>Welcome to the club {userState.email}</span>:null}
-      {userState.isLoggedIn ? <button onClick={clickHandle}>get club info</button>:null}
-      {userState.isLoggedIn ? <button onClick={logMeOut}>Logout</button>:null}
-      {!userState.isLoggedIn? <LoginForm  title={"Login"} handleFormSubmit = {handleLoginSubmit} handleInputChange = {handleLoginInput} email = {loginState.email} password = {loginState.password} />:null}
-      {!userState.isLoggedIn? <LoginForm  name={signupState.name} title={"Signup"} handleFormSubmit = {handleSignupSubmit} handleInputChange = {handleSignupInput} email = {signupState.email} password = {signupState.password} />:null}
-    </div>
+    
+    <NavBar user={userState} clickHandle={clickHandle} logMeOut = {logMeOut} loginState = {loginState} signupState={signupState}  handleLoginInput={handleLoginInput} handleSignupInput={handleSignupInput} handleSignupSubmit={handleSignupSubmit} handleLoginSubmit={handleLoginSubmit}/>
     <Switch>
         <Route exact path="/">
-         <Home />
+         <Home user={userState}/>
         </Route>
         <Route exact path="/tank/:id">
-         <TankDetail/>
+         <TankDetail user={userState}/>
         </Route>
-        <Route exact path="/profile">
-          <h1>profile</h1>
-        </Route>
-        <Route exact path="/addfish">
-          <h1>Add fish page</h1>
+        <Route exact path="/profile/:id">
+          <Profile user={userState}/>
         </Route>
     </Switch>
 

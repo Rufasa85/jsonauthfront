@@ -1,0 +1,17 @@
+.NavBar {
+    width:100vw;
+    margin:0;
+    /* position: absolute;
+    top:0;
+    left:0; */
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+    min-height:15vh;
+    background :linear-gradient(120deg,salmon 0%, salmon 50%, chartreuse 50%,chartreuse 100% )
+}
+
+* {
+    margin:0;
+    padding:0;
+}
